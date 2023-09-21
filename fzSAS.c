@@ -16,11 +16,11 @@ typedef struct // ajouter nouvelle taches
 }tache;
 	int nombredetache = 0;
 	tache tab[100];
-
+        int i, ndestatut;
 // declaration des fonctions:
 
 void choixN1 (){
-	int ndestatut;
+
 
     printf("entrer le titre de la tache ");
     scanf("%s",tab[nombredetache].titre);
@@ -43,8 +43,55 @@ void choixN1 (){
         tab[nombredetache].id=nombredetache+1;
         nombredetache++;
 }
+void choixN2 (){
+int nombre;
+printf("veuillez choisir le nombre de tache  \n");
+scanf("%d", &nombre);
+
+for (i=nombredetache; i<nombre+nombredetache; i++){
+
+ printf("entrer le titre de la tache ");
+    scanf("%s",tab[i].titre);
+    printf("entrer la description ");
+    scanf("%s", tab[i].description);
+    printf("entrer un deadline ");
+    scanf("%s", tab[i].deadline);
+    printf("entrer le numero 1 pour tache à realiser , numero 2 pour tache en cours , 3 pour tache finalisée "); 
+    scanf("%d", &ndestatut);
+  	        
+		if(ndestatut==1)
+	           strcpy(tab[i].statut , "à realiser");
+                 else if (ndestatut ==2)
+                    strcpy(tab[i].statut , "en cours");
+                 else if (ndestatut ==3)
+                    strcpy(tab[i].statut , "finalisee");
+                 else
+                     printf("veuillez choisir 1 ou 2 ou 3");
+       
+        tab[i].id=i+1;
+}
+        nombredetache += nombre; 
+
+
+
+
+
+
+}
+
 
 void choixN3(){
+
+printf("\n la liste des taches\n");
+printf("\n ----------------------------------------------\n");
+for(i=0; i<nombredetache; i++){
+printf("Id: %d\t | Titre: %s\t| Description: %s\t | Deadline: %s\t | Statut: %s\n", tab[i].id, tab[i].titre, tab[i].description, tab[i].deadline, tab[i].statut);
+ 
+}
+
+printf("\n --------------------------------------------------------------------\n");
+
+}
 
 
 
@@ -67,10 +114,12 @@ while(1){
      scanf("%d", &numero_doperation);
        switch(numero_doperation){ 
                case 1: 
-                    choixN1();            //  nouvel tache 
+                    choixN1();
+                    choixN3();            //  nouvel tache 
 		 break ;
 	       case 2:
-                     printf("bv choix 2");          // plusieur nouvelle tâches
+                     choixN2();
+                     choixN3();          // plusieur nouvelle tâches avec affichage
  	         break;
 	       case 3:
                      printf("bv choix 3");         // Affichage des listes
