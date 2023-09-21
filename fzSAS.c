@@ -22,13 +22,13 @@ typedef struct // ajouter nouvelle taches
 void choixN1 (){
 	int ndestatut;
 
-    printf("entrer le titre de la tache");
+    printf("entrer le titre de la tache ");
     scanf("%s",tab[nombredetache].titre);
-    printf("entrer la description");
+    printf("entrer la description ");
     scanf("%s", tab[nombredetache].description);
-    printf("entrer un deadline");
+    printf("entrer un deadline ");
     scanf("%s", tab[nombredetache].deadline);
-    printf("entrer le numero 1 pour tache à realiser , numero 2 pour tache en cours , 3 pour tache finalisée"); 
+    printf("entrer le numero 1 pour tache à realiser , numero 2 pour tache en cours , 3 pour tache finalisée "); 
     scanf("%d", &ndestatut);
   	        
 		if(ndestatut==1)
@@ -43,6 +43,9 @@ void choixN1 (){
         tab[nombredetache].id=nombredetache+1;
         nombredetache++;
 }
+
+void choixN3(){
+
 
 
 int main() {
