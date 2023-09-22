@@ -16,7 +16,7 @@ tache tab[100] = {
   {"deamon", "My third desc", "finalisé", "24/09/2023", 1}
 };
 
-int i, j, ndestatut;
+int i, j, ndestatut, n, d;
 
 void choixN1() { //Ajouter une ou plusieur tache 
     printf("Entrer le titre de la tâche :\n");
@@ -88,7 +88,7 @@ void choixN2() { // Affichage
 void fakeData() {
 }
 
-void alfa(tache tab[], int n) { //classement alphabetique
+void alfa(tache tab[], n) { //classement alphabetique
     tache temp;
 
     for (i = 0; i < n; i++) {
@@ -103,7 +103,7 @@ void alfa(tache tab[], int n) { //classement alphabetique
     }
 }
 
-void choixN3() { //
+void choixN3() { // tri alphabetique par tri de bull
     printf("\nListe des tâches :\n");
     printf("----------------------------------------------\n");
     for (i = 0; i < nombredetache; i++) {
@@ -113,9 +113,15 @@ void choixN3() { //
     printf("----------------------------------------------\n");
 }
 
-//void choixN5() { // suprimer une tache
-//int supprimer
+//void choixN4 (){ //modifier la tache
+	
 
+
+
+}
+
+void choixN5() { // suprimer une tache
+int supprimer(tache tab[], 
 
 
 
