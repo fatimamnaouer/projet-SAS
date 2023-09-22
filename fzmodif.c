@@ -10,10 +10,15 @@ typedef struct {
 } tache;
 
 int nombredetache = 0;
-tache tab[100];
+tache tab[100] = {
+  {"bar", "My first desc", "en cours de réalisation", "23/09/2023", 1},
+  {"foo", "My second desc", "à réaliser", "25/09/2023", 1},
+  {"deamon", "My third desc", "finalisé", "24/09/2023", 1}
+};
+
 int i, j, ndestatut;
 
-void choixN1() {
+void choixN1() { //Ajouter une ou plusieur tache 
     printf("Entrer le titre de la tâche :\n");
     scanf(" %[^\n]", tab[nombredetache].titre);
     printf("Entrer la description :\n");
@@ -24,19 +29,20 @@ void choixN1() {
 
     while (1) {
         printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
-        scanf("%d", &ndestatut);
+        scanf(" %d", &ndestatut);
 
         if (ndestatut == 1) {
             strcpy(tab[nombredetache].statut, "à réaliser");
-    
+	    break;
         } else if (ndestatut == 2) {
             strcpy(tab[nombredetache].statut, "en cours");
-     
+	    break;
         } else if (ndestatut == 3) {
             strcpy(tab[nombredetache].statut, "finalisée");
-
+	    break;
         } else {
             printf("Veuillez choisir 1, 2 ou 3.\n");
+	    break;
         }
     }
 
@@ -44,7 +50,7 @@ void choixN1() {
     nombredetache++;
 }
 
-void choixN2() {
+void choixN2() { // Affichage
     int nombre;
     printf("Veuillez choisir le nombre de tâches à ajouter :\n");
     scanf("%d", &nombre);
@@ -64,13 +70,10 @@ void choixN2() {
 
             if (ndestatut == 1) {
                 strcpy(tab[i].statut, "à réaliser");
-
             } else if (ndestatut == 2) {
                 strcpy(tab[i].statut, "en cours");
-             
             } else if (ndestatut == 3) {
                 strcpy(tab[i].statut, "finalisée");
-              
             } else {
                 printf("Veuillez choisir 1, 2 ou 3.\n");
             }
@@ -82,21 +85,25 @@ void choixN2() {
     nombredetache += nombre;
 }
 
-void alfa(tache tab[], int n) {
+void fakeData() {
+}
+
+void alfa(tache tab[], int n) { //classement alphabetique
     tache temp;
 
-    for (i = 0; i < n - 1; i++) {
-        for (j = 0; j < n - i - 1; j++) {
-            if (strcmp(tab[j].titre, tab[j + 1].titre) > 0) {
-                temp = tab[j];
-                tab[j] = tab[j + 1];
-                tab[j + 1] = temp;
+    for (i = 0; i < n; i++) {
+        for (j = i + 1; j < n; j++) {
+            // strcmp compare between two string and return who is the highest
+            if (strcmp(tab[i].titre, tab[j].titre) > 0) {
+                temp = tab[i];
+                tab[i] = tab[j];
+                tab[j] = temp;
             }
         }
     }
 }
 
-void choixN3() {
+void choixN3() { //
     printf("\nListe des tâches :\n");
     printf("----------------------------------------------\n");
     for (i = 0; i < nombredetache; i++) {
@@ -105,6 +112,21 @@ void choixN3() {
     }
     printf("----------------------------------------------\n");
 }
+
+//void choixN5() { // suprimer une tache
+//int supprimer
+
+
+
+
+
+
+
+
+
+
+
+
 
 int main() {
     int numero_doperation;
