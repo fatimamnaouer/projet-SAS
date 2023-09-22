@@ -27,7 +27,7 @@ void choixN1() { //Ajouter une ou plusieur tache
     scanf(" %s", tab[nombredetache].deadline);
 
 
-    while (1) {
+    while (1) { // la boucle pour arreter le statut de tache et passer a autre operation 
         printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
         scanf(" %d", &ndestatut);
 
@@ -69,7 +69,7 @@ void choixN2() { // Affichage
             scanf("%d", &ndestatut);
 
             if (ndestatut == 1) {
-                strcpy(tab[i].statut, "à réaliser");
+                strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
             } else if (ndestatut == 2) {
                 strcpy(tab[i].statut, "en cours");
             } else if (ndestatut == 3) {
@@ -93,7 +93,7 @@ void alfa(tache tab[], n) { //classement alphabetique
 
     for (i = 0; i < n; i++) {
         for (j = i + 1; j < n; j++) {
-            // strcmp compare between two string and return who is the highest
+            // strcmp compare entre 2 cases et retourn le plus grand
             if (strcmp(tab[i].titre, tab[j].titre) > 0) {
                 temp = tab[i];
                 tab[i] = tab[j];
@@ -103,7 +103,7 @@ void alfa(tache tab[], n) { //classement alphabetique
     }
 }
 
-void choixN3() { // tri alphabetique par tri de bull
+void choixN3() { // classement des titres en utilisant tri de bulle pour un classement alphabetique (le tri a bulle compare 2 cases de tableau)
     printf("\nListe des tâches :\n");
     printf("----------------------------------------------\n");
     for (i = 0; i < nombredetache; i++) {
@@ -114,14 +114,14 @@ void choixN3() { // tri alphabetique par tri de bull
 }
 
 //void choixN4 (){ //modifier la tache
-	
+
 
 
 
 }
 
-void choixN5() { // suprimer une tache
-int supprimer(tache tab[], 
+//void choixN5() { // suprimer une tache
+//int supprimer(tache tab[],
 
 
 
