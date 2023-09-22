@@ -88,7 +88,7 @@ void choixN2() { // Affichage
 void fakeData() {
 }
 
-void alfa(tache tab[], n) { //classement alphabetique
+void alfa(tache tab[],n) { //classement alphabetique
     tache temp;
 
     for (i = 0; i < n; i++) {
@@ -118,7 +118,7 @@ void choixN3() { // classement des titres en utilisant tri de bulle pour un clas
 
 
 
-}
+//}
 
 //void choixN5() { // suprimer une tache
 //int supprimer(tache tab[],
