@@ -3,11 +3,12 @@
 #include<stdio.h>
 
 typedef struct {
+    int id;
     char titre[100];
     char description[500];
     char statut[30];
     char deadline[11];
-    int id;
+
 } tache;
 
 int nombredetache = 0;
@@ -24,7 +25,7 @@ int recherche(){
     printf("1 :Chercher par id \n");
     printf("2 : Recherche par nom \n ");
     scanf("%d",&choice);
-    
+
     switch(choice){
         recherche_id();
         break;
@@ -33,15 +34,15 @@ int recherche(){
          break;
         case 3:
             return 0;
-        
-            
+
+
     }
 }
 int i, j, ndestatut, d;
 //////
-void choixN1() { //Ajouter une ou plusieur tache
+void choixN1() { //Ajouter une tache
     printf("tache id: %d\n", numId); //id
-    tab[nombredetache].id = numId;
+    tab[nombredetache].id = numId; //id deja initialiser par 1 
     printf("Entrer le titre de la tâche :\n");
     scanf(" %[^\n]", tab[nombredetache].titre);
     printf("Entrer la description :\n");
@@ -68,12 +69,12 @@ void choixN1() { //Ajouter une ou plusieur tache
         
         }
         
-    numId++;
-    nombredetache++;
+    numId++; // id taytincrementa b 1
+    nombredetache++;// nombredetache taytdoz l casier suivant
 }
 
-int choixN2() { // Affichage
-    int nombre;
+int choixN2() { // Affichage des taches
+    int nombre;// nombre de tache a ajouter
     printf("Veuillez choisir le nombre de tâches à ajouter :\n");
     scanf("%d", &nombre);
     if(nombre + nombredetache > 100 ){
@@ -81,8 +82,8 @@ int choixN2() { // Affichage
         return 0;
     }
 
-    for (int i = nombredetache; i < nombredetache + nombre; i++) {
-        tab[i].id = numId ;
+    for (int i = nombredetache; i < nombredetache + nombre; i++) { //nombre de tache initial howa 0 + nombre (li howa li andakhloh)
+        tab[i].id = numId ; //id 
         printf("Id : %d:\n",tab[i].id);
         printf("Entrer le titre de la tâche :\n");
         scanf(" %[^\n]", tab[i].titre);
@@ -96,8 +97,21 @@ int choixN2() { // Affichage
             printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
             scanf("%d", &ndestatut);
 
-            if (ndestatut == 1) {
-                strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
+void alfa(tache tab[],int n) { //classement alphabetique
+    tache temp;// variable isti3ana b sadi9 bch nbadlo les places
+
+    for (i = 0; i < n; i++) {
+        for (j = i + 1; j < n; j++) {
+            // strcmp compare entre 2 cases et retourn le plus grand
+            if (strcmp(tab[i].titre, tab[j].titre) > 0) {
+                temp = tab[i];
+                tab[i] = tab[j];
+                tab[j] = temp;
+            }
+        }
+    }
+}            if (ndestatut == 1) {
+                strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tachde
             } else if (ndestatut == 2) {
                 strcpy(tab[i].statut, "en cours");
             } else if (ndestatut == 3) {
@@ -113,16 +127,16 @@ int choixN2() { // Affichage
     }
     nombredetache += nombre;
     return nombredetache;
-    // nombredetache += nombre;
+    // nombredetache = nombre de tache + nombre
 }
 
 
 void alfa(tache tab[],int n) { //classement alphabetique
-    tache temp;
+    tache temp;// variable isti3ana b sadi9 bch nbadlo les places
 
-    for (i = 0; i < n; i++) {
+    for (i = 0; i < n; i++) { //n =size de titre
         for (j = i + 1; j < n; j++) {
-            // strcmp compare entre 2 cases et retourn le plus grand
+            // strcmp compare entre 2 cases et retourn le plus petit
             if (strcmp(tab[i].titre, tab[j].titre) > 0) {
                 temp = tab[i];
                 tab[i] = tab[j];
