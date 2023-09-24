@@ -35,7 +35,7 @@ int main() {
 
     printf("Bienvenue à l'application TO DO\n");
     while (1) {
-       printf("1. Ajouter une ou plusieurs nouvelles tâches\n");
+        printf("1. Ajouter une ou plusieurs nouvelles tâches\n");
         printf("2. Afficher la liste de toutes les tâches\n");
         printf("3. Modifier une tâche\n");
         printf("4. Supprimer une tâche\n");
@@ -155,12 +155,12 @@ void alfa() { //classement alphabetique
         printf("Entrer le titre de la tâche : %s\n", tab[i].titre);
         
         printf("Entrer la description : %s\n",tab[i].description);
-        
+      
         printf("Entrer une deadline %s :\n",tab[i].deadline);
         
     }
 }
-void dead_tri(){
+void dead_tri(){ //deadline en general parceque c'est pas defini si vous voulez deadline par time ou par date
     tache temp;
 
     for (i = 0; i < nombredetache; i++) {
@@ -174,31 +174,35 @@ void dead_tri(){
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
-        printf("Entrer le titre de la tâche : %s\n", tab[i].titre);
+        printf("titre de la tâche : %s\n", tab[i].titre); 
         
-        printf("Entrer la description : %s\n",tab[i].description);
+        printf("la description : %s\n",tab[i].description);
         
-        printf("Entrer une deadline %s :\n",tab[i].deadline);
+        printf("deadline %s :\n",tab[i].deadline);
         
     }
    
 }
 void modifier_tache (){ //modifier la tache description, statut et deadline
-        int codeid;
+        int codeid;//pour acceder au id  
+
         printf("veuillez entrer l'id de tache: \n");
         scanf("%d",&codeid);
-        int test = 0;
+        int test = 0;//variable pour valider la modif comparaison
 
         for(i=0; i<nombredetache; i++){
             if(tab[i].id == codeid){
+		
+		 printf("\n modifier la titre: \n");//modif titre
+                scanf(" %[^\n]", tab[i].titre);
 
-                printf("\n modifier la description: \n");
+                printf("\n modifier la description: \n"); //modif des
                 scanf(" %[^\n]", tab[i].description);
 
-                printf("\n modifier le statut: \n");
+                printf("\n modifier le statut: \n"); //modif statut
                 scanf(" %[^\n]", tab[i].statut);
 
-                printf("\n modifier deadline (jj-mm-aaaa) : \n");
+                printf("\n modifier deadline (jj-mm-aaaa) : \n"); //modif deadline
                 scanf(" %[^\n]", tab[i].deadline);
 
                 printf("Modification reussite \n");
@@ -208,7 +212,7 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
         }
     if(!test)
     {
-      printf("%d introuvable \n ", codeid);
+      printf("%d introuvable \n ", codeid);//ila kan id nafsso li dakhalnah f lawel s7i7 taydawz la boucle ila makanch s7i7 taykhroj b introuvable
     }
 }
 void supprimer_tache() 
@@ -216,16 +220,16 @@ void supprimer_tache()
     int code_id;
     printf("Entrez l'ID à supprimer:\n");
     scanf("%d", &code_id);
-    int found=0;
+    int found=0;//pour la comparaison vrai ou faux
     for (int i = 0; i < nombredetache; i++) 
     {
         if (tab[i].id == code_id) 
-        {   found=1;
+        {   found=1;// vrai
             for (int j = i; j < nombredetache - 1; j++) 
             {
                 tab[j] = tab[j + 1];
             }
-            nombredetache--;
+            nombredetache--;//tayrja3 b 1 ya3ni mataykhalich casier khawi  (nombre de tache = nombre de tache -1)
             printf("Tâche %d supprimée avec succès\n", code_id);
             break;
         }
@@ -236,8 +240,8 @@ void supprimer_tache()
         printf("%d non trouvé\n", code_id);
     }
 }
-void recherche(){
-    int choice;
+void recherche(){// fonction global dakhel fiha recherche par id w nom
+    int choice;//variable pour switch condition
     printf("Recherche \n ");
     printf("1 :Chercher par id \n");
     printf("2 : Recherche par nom \n ");
@@ -251,6 +255,7 @@ void recherche(){
         recherche_nom();
          break;
         default:
+	printf(" veuillez choisir 1 ou 2");
         break;
 
 
@@ -258,7 +263,7 @@ void recherche(){
 }
 
 void rechercher_id(){
-    int ent_id;
+    int ent_id;// hia code id li saminaha f modif o supp
             printf("\nEntrer l'id\n");
             scanf("%d",&ent_id);
             for(i=0;i<nombredetache;i++){
@@ -279,14 +284,27 @@ void recherche_nom(){
     printf("\n Entrer le titre");
     scanf(" %[^\n]", tit);
     for(int i=0; i<nombredetache; i++){
-        if(strcmp(tit, tab[i].titre)==0){
+        if(strcmp(tit, tab[i].titre)==0){// fonction predefinit pour comparer les chaine de caracteres(pluriel  string char kbira) si est egal a 0 alors lkaha titre
         printf("\n %s", tab[i].titre);
-                printf("\n %s", tab[i].description);
-                printf("\n%s", tab[i].deadline);
-                printf("\n%s",tab[i].statut);
+        printf("\n %s", tab[i].description);
+        printf("\n%s", tab[i].deadline);
+        printf("\n%s",tab[i].statut);
         }
         else {
             printf("introuvable");
         }
     }
+}
+void stq_aff_total_tache() {
+	int tot = 0;
+	for( i=0;i<nombredetache;i++){
+	tot = tot+1;
+}
+	printf("le nombre total de tache est : %d ", tot);
+
+}
+
+void situtation_statut(){
+
+
 }
