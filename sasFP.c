@@ -72,10 +72,10 @@ int main() {
                 printf("Erreur\n");
                 break;
         }
-        
+
     }
 
-    
+
 }
 void ajouter_tache2(){
     int nombre;
@@ -83,7 +83,7 @@ void ajouter_tache2(){
     scanf("%d", &nombre);
     if(nombre + nombredetache > 100 ){
         printf("Erreur : vous avez depasser les nombres autorises");
-        
+
     }
 
     for (int i = nombredetache; i < nombredetache + nombre; i++) {
@@ -113,14 +113,11 @@ void ajouter_tache2(){
             }
         // }
 
-        // tab[i].id = i + 1;
-        
+
         numId++;
     }
     nombredetache += nombre;
-  
-    // nombredetache += nombre;
-    
+
 }
 
 void afficher_tache(){
@@ -135,11 +132,11 @@ void afficher_tache(){
                          dead_tri();
                         break;
                 }
-                
+
 }
 void alfa() { //classement alphabetique
     tache temp;
-   
+
     for (i = 0; i < nombredetache; i++) {
         for (j = i + 1; j < nombredetache; j++) {
             // strcmp compare entre 2 cases et retourn le plus grand
@@ -153,11 +150,11 @@ void alfa() { //classement alphabetique
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
         printf("Entrer le titre de la tâche : %s\n", tab[i].titre);
-        
+
         printf("Entrer la description : %s\n",tab[i].description);
-      
+
         printf("Entrer une deadline %s :\n",tab[i].deadline);
-        
+
     }
 }
 void dead_tri(){ //deadline en general parceque c'est pas defini si vous voulez deadline par time ou par date
@@ -174,17 +171,17 @@ void dead_tri(){ //deadline en general parceque c'est pas defini si vous voulez 
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
-        printf("titre de la tâche : %s\n", tab[i].titre); 
-        
+        printf("titre de la tâche : %s\n", tab[i].titre);
+
         printf("la description : %s\n",tab[i].description);
-        
+
         printf("deadline %s :\n",tab[i].deadline);
-        
+
     }
-   
+
 }
 void modifier_tache (){ //modifier la tache description, statut et deadline
-        int codeid;//pour acceder au id  
+        int codeid;//pour acceder au id
 
         printf("veuillez entrer l'id de tache: \n");
         scanf("%d",&codeid);
@@ -192,7 +189,7 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
 
         for(i=0; i<nombredetache; i++){
             if(tab[i].id == codeid){
-		
+
 		 printf("\n modifier la titre: \n");//modif titre
                 scanf(" %[^\n]", tab[i].titre);
 
@@ -215,17 +212,17 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
       printf("%d introuvable \n ", codeid);//ila kan id nafsso li dakhalnah f lawel s7i7 taydawz la boucle ila makanch s7i7 taykhroj b introuvable
     }
 }
-void supprimer_tache() 
+void supprimer_tache()
 {
     int code_id;
     printf("Entrez l'ID à supprimer:\n");
     scanf("%d", &code_id);
     int found=0;//pour la comparaison vrai ou faux
-    for (int i = 0; i < nombredetache; i++) 
+    for (int i = 0; i < nombredetache; i++)
     {
-        if (tab[i].id == code_id) 
+        if (tab[i].id == code_id)
         {   found=1;// vrai
-            for (int j = i; j < nombredetache - 1; j++) 
+            for (int j = i; j < nombredetache - 1; j++)
             {
                 tab[j] = tab[j + 1];
             }
