@@ -1,6 +1,7 @@
 #include <string.h>
 #include<stdlib.h>
 #include<stdio.h>
+//declaration struction nome par tache (typedef contient plusieur variable)
 
 typedef struct {
     int id;
@@ -10,15 +11,15 @@ typedef struct {
     char deadline[11];
 
 } tache;
-
-int nombredetache = 0;
-int numId =1;
+//declaration des variables globale
+int nombredetache = 0;//nombre de tache initialise par 0
+int numId =1;//id initialise par 1
 int i,j;
-tache tab[100];
+tache tab[100];//tableau maximum 100 casiers
 void recherche_nom();
 void supprimer_tache();
 void modifier_tache ();
-void recherche();
+void recherche();//contient recherche par id et par nom
 void ajouter_tache();
 void ajouter_tache2();
 void alfa();
@@ -28,6 +29,7 @@ void rechercher_id();
 void recherche_nom();
 void afficher_tache();
 void statistique();
+void situation_statut();
 
 int main() {
     int numero_doperation;
@@ -107,8 +109,9 @@ void ajouter_tache2(){
             } else if (ndestatut == 3) {
                 strcpy(tab[i].statut, "finalisée");
             } else {
-                printf("CHOIX INVALIDE \n");
-		        break;
+		//MODIFICATIOn
+		printf("Choix invalide, Veuillez entrer un statut entre les trois \n ");
+                scanf("%d",&ndestatut); 
             }
 
 
@@ -116,11 +119,6 @@ void ajouter_tache2(){
     }
     nombredetache += nombre;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 01e80ea14924697949931a74aa3ec4831afee012
 }
 
 void afficher_tache(){
@@ -152,21 +150,21 @@ void alfa() { //classement alphabetique
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
-<<<<<<< HEAD
+
         printf("Entrer le titre de la tâche : %s\n", tab[i].titre);
 
         printf("Entrer la description : %s\n",tab[i].description);
 
         printf("Entrer une deadline %s :\n",tab[i].deadline);
-=======
+
         printf("Le titre de la tâche : %s\n", tab[i].titre);
 
         printf("La description : %s\n",tab[i].description);
 
         printf(" deadline :%s \n",tab[i].deadline);
-	
+
 	printf("statut: %s \n",tab[i].statut);
->>>>>>> 01e80ea14924697949931a74aa3ec4831afee012
+
 
     }
 }
@@ -176,19 +174,18 @@ void dead_tri(){ //deadline en general parceque c'est pas defini si vous voulez 
     for (i = 0; i < nombredetache; i++) {
         for (j = i + 1; j < nombredetache; j++) {
             if (strcmp(tab[j].deadline, tab[j-1].deadline) < 0) {
-                temp = tab[j];
-                tab[j] = tab[j-1];
-                tab[j-1] = temp;
+                temp = tab[j-1];
+                tab[j-1] = tab[j];
+                tab[j] = temp;
             }
         }
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
-<<<<<<< HEAD
+
         printf("titre de la tâche : %s\n", tab[i].titre);
-=======
-        printf("titre de la tâche : %s\n", tab[i].titre); 
->>>>>>> 01e80ea14924697949931a74aa3ec4831afee012
+
+        printf("statut de la tâche : %s\n", tab[i].statut);
 
         printf("la description : %s\n",tab[i].description);
 
@@ -209,7 +206,7 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
 
 		 printf("\n modifier la titre: \n");//modif titre
                 scanf(" %[^\n]", tab[i].titre);
-		
+
 		printf("\n modifier la description \n");
                 scanf(" %[^\n]", tab[i].description);
 
@@ -217,7 +214,7 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
                 printf("\n modifier le statut: \n"); //modif statut
 		        printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
                 scanf("%d",&ndestatut);
-                
+
                  if (ndestatut == 1) {
                     strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
                 } else if (ndestatut == 2) {
@@ -225,9 +222,9 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
                 } else if (ndestatut == 3) {
                     strcpy(tab[i].statut, "finalisée");
                 } else {
-                    printf("CHOIX INVALIDE \n");
-                break;
-            
+                    printf("CHOIX INVALIDE, veuillez entrer un statut entre les trois \n");
+                    scanf("%d",&ndestatut);
+
                 }
 
                 printf("\n modifier deadline (jj-mm-aaaa) : \n"); //modif deadline
