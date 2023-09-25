@@ -27,6 +27,7 @@ void dead_tri();
 void rechercher_id();
 void recherche_nom();
 void afficher_tache();
+void statistique();
 
 int main() {
     int numero_doperation;
@@ -63,13 +64,11 @@ int main() {
                 recherche();
                 break;
             case 6:
-                printf("bv choix 7\n"); // Statistique
+                statistique(); // Statistique
                 break;
-            case 7:
-                printf("Au revoir !\n"); // Quitter
-                return 0;
+
             default:
-                printf("Erreur\n");
+                printf("erreur !");//quitter
                 break;
         }
 
@@ -97,27 +96,31 @@ void ajouter_tache2(){
         scanf(" %s", tab[i].deadline);
 
         int validChoix = 0;
-        // while (1) { //valider le choix
+
             int ndestatut;
             printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
             scanf("%d", &ndestatut);
-
-            if (ndestatut == 1) {
+	    if (ndestatut == 1) {
                 strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
             } else if (ndestatut == 2) {
                 strcpy(tab[i].statut, "en cours");
             } else if (ndestatut == 3) {
                 strcpy(tab[i].statut, "finalisée");
             } else {
-                printf("Veuillez choisir 1, 2 ou 3.\n");
+                printf("CHOIX INVALIDE \n");
+		        break;
             }
-        // }
 
 
         numId++;
     }
     nombredetache += nombre;
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 01e80ea14924697949931a74aa3ec4831afee012
 }
 
 void afficher_tache(){
@@ -140,7 +143,7 @@ void alfa() { //classement alphabetique
     for (i = 0; i < nombredetache; i++) {
         for (j = i + 1; j < nombredetache; j++) {
             // strcmp compare entre 2 cases et retourn le plus grand
-            if (strcmp(tab[i].titre, tab[j].titre) < 0) {
+            if (strcmp(tab[i].titre, tab[j].titre) > 0) {
                 temp = tab[i];
                 tab[i] = tab[j];
                 tab[j] = temp;
@@ -149,11 +152,21 @@ void alfa() { //classement alphabetique
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
+<<<<<<< HEAD
         printf("Entrer le titre de la tâche : %s\n", tab[i].titre);
 
         printf("Entrer la description : %s\n",tab[i].description);
 
         printf("Entrer une deadline %s :\n",tab[i].deadline);
+=======
+        printf("Le titre de la tâche : %s\n", tab[i].titre);
+
+        printf("La description : %s\n",tab[i].description);
+
+        printf(" deadline :%s \n",tab[i].deadline);
+	
+	printf("statut: %s \n",tab[i].statut);
+>>>>>>> 01e80ea14924697949931a74aa3ec4831afee012
 
     }
 }
@@ -171,7 +184,11 @@ void dead_tri(){ //deadline en general parceque c'est pas defini si vous voulez 
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
+<<<<<<< HEAD
         printf("titre de la tâche : %s\n", tab[i].titre);
+=======
+        printf("titre de la tâche : %s\n", tab[i].titre); 
+>>>>>>> 01e80ea14924697949931a74aa3ec4831afee012
 
         printf("la description : %s\n",tab[i].description);
 
@@ -192,12 +209,26 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
 
 		 printf("\n modifier la titre: \n");//modif titre
                 scanf(" %[^\n]", tab[i].titre);
-
-                printf("\n modifier la description: \n"); //modif des
+		
+		printf("\n modifier la description \n");
                 scanf(" %[^\n]", tab[i].description);
 
+                int ndestatut;
                 printf("\n modifier le statut: \n"); //modif statut
-                scanf(" %[^\n]", tab[i].statut);
+		        printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
+                scanf("%d",&ndestatut);
+                
+                 if (ndestatut == 1) {
+                    strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
+                } else if (ndestatut == 2) {
+                    strcpy(tab[i].statut, "en cours");
+                } else if (ndestatut == 3) {
+                    strcpy(tab[i].statut, "finalisée");
+                } else {
+                    printf("CHOIX INVALIDE \n");
+                break;
+            
+                }
 
                 printf("\n modifier deadline (jj-mm-aaaa) : \n"); //modif deadline
                 scanf(" %[^\n]", tab[i].deadline);
@@ -269,7 +300,6 @@ void rechercher_id(){
                 printf("\n %s", tab[i].description);
                 printf("\n%s", tab[i].deadline);
                 printf("\n%s",tab[i].statut);
-
                 }
                 else{
                 printf("\n numero id introuvable");
@@ -286,22 +316,43 @@ void recherche_nom(){
         printf("\n %s", tab[i].description);
         printf("\n%s", tab[i].deadline);
         printf("\n%s",tab[i].statut);
-        }
-        else {
+        } else {
             printf("introuvable");
         }
     }
 }
-void stq_aff_total_tache() {
-	int tot = 0;
-	for( i=0;i<nombredetache;i++){
-	tot = tot+1;
-}
-	printf("le nombre total de tache est : %d ", tot);
 
-}
 
 void situtation_statut(){
-
-
+	int complete=0;
+	int incomplete=0;
+      for(i=0 ; i<nombredetache; i++){
+        if(strcmp(tab[i].statut, "finalisée")==0)complete++;
+        else  incomplete++;
+    }
+	printf("le nombre de tache complete et incomplete est: \n");
+	printf("tache complete: %d\n", complete);
+	printf("tache incomplete: %d\n", incomplete);
 }
+
+void statistique(){// fonction global dakhel fiha statistique total des taches et total tache complete et incomplete
+    int choix;//variable pour switch condition
+    printf("total des taches \n ");
+    printf("1 :Nombre des taches \n");
+    printf("2 :tache incomplete et complete \n ");
+    scanf("%d",&choix);
+
+    switch(choix){
+        case 1 :
+            printf("Le nombre de tach est : %d ",nombredetache);
+            break;
+        case 2 :
+        situtation_statut();
+         break;
+        default:
+        printf("nombre de jrs pour complete la tache");
+        break;
+
+    }
+}
+

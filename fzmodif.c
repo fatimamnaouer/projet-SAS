@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include<stdlib.h>
 
 typedef struct {
     char titre[100];
@@ -10,16 +11,17 @@ typedef struct {
 } tache;
 
 int nombredetache = 0;
-tache tab[100] = {
-  {"bar", "My first desc", "en cours de réalisation", "23/09/2023", 1},
-  {"foo", "My second desc", "à réaliser", "25/09/2023", 1},
-  {"deamon", "My third desc", "finalisé", "24/09/2023", 1}
-};
+//tache tab[100] = {
+  //{"bar", "My first desc", "en cours de réalisation", "23/09/2023", 1},
+ // {"foo", "My second desc", "à réaliser", "25/09/2023", 1},
+ // {"deamon", "My third desc", "finalisé", "24/09/2023", 1}
+//};
 
 int i, j, ndestatut, n, d;
 
 void choixN1() { //Ajouter une ou plusieur tache 
     printf("Entrer le titre de la tâche :\n");
+    printf("tache id : %d", tab[i].id); //id
     scanf(" %[^\n]", tab[nombredetache].titre);
     printf("Entrer la description :\n");
     scanf(" %[^\n]", tab[nombredetache].description);
@@ -27,7 +29,7 @@ void choixN1() { //Ajouter une ou plusieur tache
     scanf(" %s", tab[nombredetache].deadline);
 
 
-    while (1) { // la boucle pour arreter le statut de tache et passer a autre operation 
+    while (1) { // la boucle pour arreter le statut de tache et passer a autre operation
         printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
         scanf(" %d", &ndestatut);
 
@@ -85,8 +87,8 @@ void choixN2() { // Affichage
     nombredetache += nombre;
 }
 
-void fakeData() {
-}
+//void fakeData() {
+//}
 
 void alfa(tache tab[],n) { //classement alphabetique
     tache temp;
@@ -113,12 +115,33 @@ void choixN3() { // classement des titres en utilisant tri de bulle pour un clas
     printf("----------------------------------------------\n");
 }
 
-//void choixN4 (){ //modifier la tache
+void choixN4 (){ //modifier la tache description, statut et deadline
+ 	int codeid;
+	printf("veuillez entrer l'id de tache: \n");
+	scanf("%d",&codeid);
+	int test = 0;
 
+	for(i=0; i<nombredetache; i++){
+	  if(tab[i].id == codeid)
+	{
+	printf("\n modifier la description: \n");
+	scanf(" %[^\n]", tab[i].description);
 
+	printf("\n modifier le statut: \n");
+	scanf(" %[^\n]", tab[i].statut);
 
+	printf("\n modifier deadline (jj-mm-aaaa) : \n");
+	scanf(" %[^\n]", tab[i].deadline);
 
-//}
+	printf("Modification reussite \n");
+	test = 1;
+	break;
+    }
+    if(!test)
+{
+      printf("%d introuvable \n ", codeid);
+}
+}
 
 //void choixN5() { // suprimer une tache
 //int supprimer(tache tab[],
