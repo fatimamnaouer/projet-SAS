@@ -28,6 +28,7 @@ void rechercher_id();
 void recherche_nom();
 void afficher_tache();
 void statistique();
+
 int main() {
     int numero_doperation;
     int i, j, ndestatut, d;
@@ -67,7 +68,7 @@ int main() {
                 break;
 
             default:
-                printf("Au revoir !");//quitter
+                printf("erreur !");//quitter
                 break;
         }
 
@@ -107,7 +108,7 @@ void ajouter_tache2(){
                 strcpy(tab[i].statut, "finalisée");
             } else {
                 printf("CHOIX INVALIDE \n");
-		break;
+		        break;
             }
 
 
@@ -148,11 +149,13 @@ void alfa() { //classement alphabetique
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
-        printf("Entrer le titre de la tâche : %s\n", tab[i].titre);
+        printf("Le titre de la tâche : %s\n", tab[i].titre);
 
-        printf("Entrer la description : %s\n",tab[i].description);
+        printf("La description : %s\n",tab[i].description);
 
-        printf("Entrer une deadline %s :\n",tab[i].deadline);
+        printf(" deadline :%s \n",tab[i].deadline);
+	
+	printf("statut: %s \n",tab[i].statut);
 
     }
 }
@@ -191,12 +194,26 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
 
 		 printf("\n modifier la titre: \n");//modif titre
                 scanf(" %[^\n]", tab[i].titre);
-
-                printf("\n modifier la description: \n"); //modif des
+		
+		printf("\n modifier la description \n");
                 scanf(" %[^\n]", tab[i].description);
 
+                int ndestatut;
                 printf("\n modifier le statut: \n"); //modif statut
-                scanf(" %[^\n]", tab[i].statut);
+		        printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
+                scanf("%d",&ndestatut);
+                
+                 if (ndestatut == 1) {
+                    strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
+                } else if (ndestatut == 2) {
+                    strcpy(tab[i].statut, "en cours");
+                } else if (ndestatut == 3) {
+                    strcpy(tab[i].statut, "finalisée");
+                } else {
+                    printf("CHOIX INVALIDE \n");
+                break;
+            
+                }
 
                 printf("\n modifier deadline (jj-mm-aaaa) : \n"); //modif deadline
                 scanf(" %[^\n]", tab[i].deadline);
@@ -323,3 +340,4 @@ void statistique(){// fonction global dakhel fiha statistique total des taches e
 
     }
 }
+
