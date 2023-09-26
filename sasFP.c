@@ -66,7 +66,8 @@ int main() {
             case 6:
                 statistique(); // Statistique
                 break;
-
+            case 7 :
+                return 0;
             default:
                 printf("erreur !");//quitter
                 break;
