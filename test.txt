@@ -1,4 +1,0 @@
- // case 1:
-            //     ajouter_tache();
-            //     break;
-            
