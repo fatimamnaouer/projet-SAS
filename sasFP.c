@@ -166,11 +166,11 @@ void alfa() { //classement alphabetique
 void dead_tri(){ //classement par date
     tache temp;//variable temporaire pour changer l'ordre du tache
 
-    for (i = 0; i < nombredetache; i++) {
-        for (j = i + 1; j < nombredetache; j++) {
-            if (strcmp(tab[j].deadline, tab[j-1].deadline) < 0) {
-                temp = tab[j-1];
-                tab[j-1] = tab[j];
+    for (i = 0; i < nombredetache-1; i++) {
+        for (j = 0; j < nombredetache-i-1; j++) {
+            if (strcmp(tab[j].deadline, tab[j+1].deadline) > 0) {
+                temp = tab[j+1];
+                tab[j+1] = tab[j];
                 tab[j] = temp;
             }
         }
@@ -187,8 +187,9 @@ void dead_tri(){ //classement par date
         printf("deadline %s :\n",tab[i].deadline);
 
     }
+  }
 
-}
+
 void modifier_tache (){ //modifier la tache description, statut, titre et deadline
         int codeid;//id du tache a modifier
 
@@ -293,9 +294,7 @@ void rechercher_id(){//rechercher la tache par son id
                 printf("\n%s", tab[i].deadline);
                 printf("\n%s",tab[i].statut);
                 }
-                else{
-                printf("\n numero id introuvable");
-                }
+               
             }
 }
 void recherche_nom(){//rechercher la tache par son nom
@@ -308,9 +307,7 @@ void recherche_nom(){//rechercher la tache par son nom
         printf("\n %s", tab[i].description);
         printf("\n%s", tab[i].deadline);
         printf("\n%s",tab[i].statut);
-        } else {
-            printf("introuvable");
-        }
+        } 
     }
 }
 
