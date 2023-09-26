@@ -1,6 +1,7 @@
 #include <string.h>
 #include<stdlib.h>
 #include<stdio.h>
+//declaration struction nomee par tache (typedef contient plusieur variable)
 
 typedef struct {
     int id;
@@ -10,27 +11,28 @@ typedef struct {
     char deadline[11];
 
 } tache;
-
-int nombredetache = 0;
-int numId =1;
-int i,j;
-tache tab[100];
-void recherche_nom();
-void supprimer_tache();
-void modifier_tache ();
-void recherche();
+//declaration des variables globale
 void ajouter_tache();
-void ajouter_tache2();
+void afficher_tache();
 void alfa();
-void modifier_tache ();
 void dead_tri();
+void modifier_tache();
+void supprimer_tache();
+void recherche();//contient recherche par id et par nom
 void rechercher_id();
 void recherche_nom();
-void afficher_tache();
 void statistique();
+void situation_statut();
+
+//declaration des variable globale
+int nombredetache = 0;//nombre de tache initialise par 0
+int numId =1;//id initialise par 1
+int i,j;
+tache tab[100];//tableau maximum 100 casiers
+
 
 int main() {
-    int numero_doperation;
+    int numero_doperation;//
     int i, j, ndestatut, d;
     int nombre;
 
@@ -49,22 +51,22 @@ int main() {
 
         switch (numero_doperation) {
            case 1:
-                 ajouter_tache2(); // Plusieurs nouvelles tâches avec affichage
+                 ajouter_tache(); // ajouter une ou Plusieurs nouvelles tâches avec id
                 break;
             case 2:
-                afficher_tache();
+                afficher_tache();//affichage des taches (par ordre alphabetique ou par date)
                 break;
             case 3:
-                modifier_tache ();// Modifier la tâche
+                modifier_tache ();// Modifier la tâche avec id
                 break;
             case 4:
-                supprimer_tache(); // Supprimer la tâche
+                supprimer_tache(); // Supprimer la tâche avec id
                 break;
             case 5:
-                recherche();
+                recherche();//chercher une tache avec id ou nom
                 break;
             case 6:
-                statistique(); // Statistique
+                statistique(); // Statistique (totate des taches =nombre de tache) et (tache complete et incomplete)
                 break;
             case 7 :
                 return 0;
@@ -77,7 +79,7 @@ int main() {
 
 
 }
-void ajouter_tache2(){
+void ajouter_tache(){
     int nombre;
     printf("Veuillez choisir le nombre de tâches à ajouter :\n");
     scanf("%d", &nombre);
@@ -96,33 +98,30 @@ void ajouter_tache2(){
         printf("Entrer une deadline (format JJ/MM/AAAA) :\n");
         scanf(" %s", tab[i].deadline);
 
-        int validChoix = 0;
 
             int ndestatut;
             printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
             scanf("%d", &ndestatut);
-	    if (ndestatut == 1) {
-                strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
+	    if (ndestatut == 1) { //1 statut a realiser
+                strcpy(tab[i].statut, "à réaliser");//strcpy pour affecter  une valeur a un variable deja declarer au structure
             } else if (ndestatut == 2) {
                 strcpy(tab[i].statut, "en cours");
             } else if (ndestatut == 3) {
                 strcpy(tab[i].statut, "finalisée");
             } else {
-                printf("CHOIX INVALIDE \n");
-		        break;
+
+		printf("Choix invalide, Veuillez entrer un statut entre les trois \n ");
+                scanf("%d",&ndestatut);
             }
 
-
-        numId++;
+        numId++;// apres la boucle il s'incremente l'id +
     }
-    nombredetache += nombre;
-
-
+    nombredetache += nombre; //il s'incremente le nombre de tache
 
 }
 
 void afficher_tache(){
-    int choix;
+    int choix;// variable pour donner a l'utilisateur l'acces a choisir 1 ordre alfa ou 2 ordre deadline
                 printf("\n Afficher en :\n 1-tri par ordre alphabetique \n 2-tri par deadline\n");
                 scanf ("%d",&choix);
                 switch(choix){
@@ -130,13 +129,13 @@ void afficher_tache(){
                         alfa();
                      break;
                      case 2 :
-                         dead_tri();
+                         dead_tri();//le tri compare 2 casiers par 2 casiers du tableau
                         break;
                 }
 
 }
 void alfa() { //classement alphabetique
-    tache temp;
+    tache temp;//pour changer l'ordre du tableau on a besoin de variable temporaire pour stocker
 
     for (i = 0; i < nombredetache; i++) {
         for (j = i + 1; j < nombredetache; j++) {
@@ -148,33 +147,40 @@ void alfa() { //classement alphabetique
             }
         }
     }
-    for(int i=0;i<nombredetache;i++){
+
+
+    for(i=0; i<nombredetache; i++){ //affichage du tache apres classement par titre
         printf("Id : %d:\n",tab[i].id);
-        printf("Le titre de la tâche : %s\n", tab[i].titre);
+
+        printf("Entrer le titre de la tâche : %s\n", tab[i].titre);
 
         printf("La description : %s\n",tab[i].description);
 
         printf(" deadline :%s \n",tab[i].deadline);
-	
+
 	printf("statut: %s \n",tab[i].statut);
+
 
     }
 }
-void dead_tri(){ //deadline en general parceque c'est pas defini si vous voulez deadline par time ou par date
-    tache temp;
+void dead_tri(){ //classement par date
+    tache temp;//variable temporaire pour changer l'ordre du tache
 
     for (i = 0; i < nombredetache; i++) {
         for (j = i + 1; j < nombredetache; j++) {
             if (strcmp(tab[j].deadline, tab[j-1].deadline) < 0) {
-                temp = tab[j];
-                tab[j] = tab[j-1];
-                tab[j-1] = temp;
+                temp = tab[j-1];
+                tab[j-1] = tab[j];
+                tab[j] = temp;
             }
         }
     }
     for(int i=0;i<nombredetache;i++){
         printf("Id : %d:\n",tab[i].id);
-        printf("titre de la tâche : %s\n", tab[i].titre); 
+
+        printf("titre de la tâche : %s\n", tab[i].titre);// l'affichage du tache apres son classement par date
+
+        printf("statut de la tâche : %s\n", tab[i].statut);
 
         printf("la description : %s\n",tab[i].description);
 
@@ -183,27 +189,27 @@ void dead_tri(){ //deadline en general parceque c'est pas defini si vous voulez 
     }
 
 }
-void modifier_tache (){ //modifier la tache description, statut et deadline
-        int codeid;//pour acceder au id  
+void modifier_tache (){ //modifier la tache description, statut, titre et deadline
+        int codeid;//id du tache a modifier
 
         printf("veuillez entrer l'id de tache: \n");
         scanf("%d",&codeid);
-        int test = 0;//variable pour valider la modif comparaison
+       int test = 0;//variable pour valider la modif comparaison
 
         for(i=0; i<nombredetache; i++){
             if(tab[i].id == codeid){
 
 		 printf("\n modifier la titre: \n");//modif titre
                 scanf(" %[^\n]", tab[i].titre);
-		
+
 		printf("\n modifier la description \n");
                 scanf(" %[^\n]", tab[i].description);
 
                 int ndestatut;
                 printf("\n modifier le statut: \n"); //modif statut
-		        printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
+		printf("Entrer le numéro 1 pour tâche à réaliser, numéro 2 pour tâche en cours, 3 pour tâche finalisée : ");
                 scanf("%d",&ndestatut);
-                
+
                  if (ndestatut == 1) {
                     strcpy(tab[i].statut, "à réaliser");//strcpy pour importer toute les donnees de structure tache
                 } else if (ndestatut == 2) {
@@ -211,27 +217,27 @@ void modifier_tache (){ //modifier la tache description, statut et deadline
                 } else if (ndestatut == 3) {
                     strcpy(tab[i].statut, "finalisée");
                 } else {
-                    printf("CHOIX INVALIDE \n");
-                break;
-            
+                    printf("CHOIX INVALIDE, veuillez entrer un statut entre les trois \n");
+                    scanf("%d",&ndestatut);
+
                 }
 
                 printf("\n modifier deadline (jj-mm-aaaa) : \n"); //modif deadline
                 scanf(" %[^\n]", tab[i].deadline);
 
                 printf("Modification reussite \n");
-                test = 1;
+                test = 1;//code id correcte
                 break;
             }
         }
-    if(!test)
+    if(!test)//code id incorrecte
     {
-      printf("%d introuvable \n ", codeid);//ila kan id nafsso li dakhalnah f lawel s7i7 taydawz la boucle ila makanch s7i7 taykhroj b introuvable
+      printf("%d introuvable \n ", codeid);//afficher introuvable
     }
 }
 void supprimer_tache()
 {
-    int code_id;
+    int code_id;//variable pour acceder au tache recherche
     printf("Entrez l'ID à supprimer:\n");
     scanf("%d", &code_id);
     int found=0;//pour la comparaison vrai ou faux
@@ -243,7 +249,7 @@ void supprimer_tache()
             {
                 tab[j] = tab[j + 1];
             }
-            nombredetache--;//tayrja3 b 1 ya3ni mataykhalich casier khawi  (nombre de tache = nombre de tache -1)
+            nombredetache--;//retourn a la place de tache supprimer pour ne pas avoir un decalage (nombre de tache = nombre de tache -1)
             printf("Tâche %d supprimée avec succès\n", code_id);
             break;
         }
@@ -254,7 +260,7 @@ void supprimer_tache()
         printf("%d non trouvé\n", code_id);
     }
 }
-void recherche(){// fonction global dakhel fiha recherche par id w nom
+void recherche(){// fonction globale contient recherche par id et par nom
     int choice;//variable pour switch condition
     printf("Recherche \n ");
     printf("1 :Chercher par id \n");
@@ -266,23 +272,23 @@ void recherche(){// fonction global dakhel fiha recherche par id w nom
             rechercher_id();
             break;
         case 2 :
-        recherche_nom();
+            recherche_nom();
          break;
         default:
-	printf(" veuillez choisir 1 ou 2");
+	    printf(" veuillez choisir 1 ou 2");
         break;
 
 
     }
 }
 
-void rechercher_id(){
-    int ent_id;// hia code id li saminaha f modif o supp
+void rechercher_id(){//rechercher la tache par son id
+    int ent_id;//variable pour valider le numero d'id
             printf("\nEntrer l'id\n");
             scanf("%d",&ent_id);
             for(i=0;i<nombredetache;i++){
-                if( tab[i].id==ent_id){
-                printf("\n %s", tab[i].titre);
+                if( tab[i].id==ent_id){//confirme le numeri de l'id
+                printf("\n %s", tab[i].titre);//il s'affiche les information de la tache
                 printf("\n %s", tab[i].description);
                 printf("\n%s", tab[i].deadline);
                 printf("\n%s",tab[i].statut);
@@ -292,12 +298,12 @@ void rechercher_id(){
                 }
             }
 }
-void recherche_nom(){
+void recherche_nom(){//rechercher la tache par son nom
     char tit[100];
-    printf("\n Entrer le titre");
+    printf("\n Entrer le titre ");
     scanf(" %[^\n]", tit);
     for(int i=0; i<nombredetache; i++){
-        if(strcmp(tit, tab[i].titre)==0){// fonction predefinit pour comparer les chaine de caracteres(pluriel  string char kbira) si est egal a 0 alors lkaha titre
+        if(strcmp(tit, tab[i].titre)==0){// fonction predefinit pour comparer les chaine de caracteres //sont egaux
         printf("\n %s", tab[i].titre);
         printf("\n %s", tab[i].description);
         printf("\n%s", tab[i].deadline);
@@ -309,11 +315,11 @@ void recherche_nom(){
 }
 
 
-void situtation_statut(){
-	int complete=0;
-	int incomplete=0;
+void situation_statut(){//tache complete et incomplete
+	int complete=0;//initialiser la tache complete par 0
+	int incomplete=0;//initialiser la tache incomplete par 0
       for(i=0 ; i<nombredetache; i++){
-        if(strcmp(tab[i].statut, "finalisée")==0)complete++;
+        if(strcmp(tab[i].statut, "finalisée")==0)complete++;//sont egaux
         else  incomplete++;
     }
 	printf("le nombre de tache complete et incomplete est: \n");
@@ -321,7 +327,7 @@ void situtation_statut(){
 	printf("tache incomplete: %d\n", incomplete);
 }
 
-void statistique(){// fonction global dakhel fiha statistique total des taches et total tache complete et incomplete
+void statistique(){// fonction global statistique total des taches et total tache complete et incomplete
     int choix;//variable pour switch condition
     printf("total des taches \n ");
     printf("1 :Nombre des taches \n");
@@ -330,13 +336,13 @@ void statistique(){// fonction global dakhel fiha statistique total des taches e
 
     switch(choix){
         case 1 :
-            printf("Le nombre de tach est : %d ",nombredetache);
+            printf("Le nombre de tache est : %d \n",nombredetache);//total des tache = nombre de tache
             break;
         case 2 :
-        situtation_statut();
+        situation_statut();
          break;
         default:
-        printf("nombre de jrs pour complete la tache");
+        printf("nombre de jrs pour completer la tache");
         break;
 
     }
